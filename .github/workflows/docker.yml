@@ -58,7 +58,7 @@ jobs:
         username: ${{ vars.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
     - name: Publish image
-      run: pack build ${{ vars.DOCKER_USERNAME }}/angular-learning --buildpack paketo-buildpacks/web-servers --publish --tag "${{ steps.transform.outputs.tags }}" --env BP_NODE_RUN_SCRIPTS=build --env BP_WEB_SERVER=nginx --env BP_WEB_SERVER_ROOT=dist/angular-learning --env BP_WEB_SERVER_ENABLE_PUSH_STATE=true --verbose
+      run: pack build ${{ vars.DOCKER_USERNAME }}/angular-learning:${{ steps.meta.outputs.version }} --buildpack paketo-buildpacks/web-servers --publish --tag "${{ steps.transform.outputs.tags }}" --env BP_NODE_RUN_SCRIPTS=build --env BP_WEB_SERVER=nginx --env BP_WEB_SERVER_ROOT=dist/angular-learning --env BP_WEB_SERVER_ENABLE_PUSH_STATE=true --verbose
 
     - name: Find PR comment
       if: github.event_name == 'pull_request'
@@ -75,6 +75,7 @@ jobs:
       with:
         comment-id: ${{ steps.fc.outputs.comment-id }}
         issue-number: ${{ github.event.pull_request.number }}
+        edit-mode: replace
         body: |
           Docker tags:
           ```
@@ -85,3 +86,10 @@ jobs:
       if: github.event_name != 'pull_request'
       run: |
         echo "${{ steps.meta.outputs.tags }}" >> $GITHUB_STEP_SUMMARY
+
+    - name: Scan with Scout
+      uses: docker/scout-action@v1.0.8
+      with:
+        command: quickview,compare
+        image: ${{ vars.DOCKER_USERNAME }}/angular-learning:${{ steps.meta.outputs.version }}
+        to: registry://${{ vars.DOCKER_USERNAME }}/angular-learning:latest
