@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IPost } from './post.model';
+import { PostService } from './post.service';
 
 @Component({
   selector: 'app-posts',
@@ -7,22 +8,14 @@ import { IPost } from './post.model';
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent {
-  posts: IPost[]
+  posts?: IPost[]
 
-  constructor() {
-    this.posts = [
-      {
-        title: "Hello World",
-        body: "First blog post"
-      },
-      {
-        title: "Hello World2",
-        body: "First blog post2"
-      },
-      {
-        title: "Hello World3",
-        body: "First blog post3"
-      }
-    ]
+  constructor(private postService : PostService) {
+  }
+
+  ngOnInit() {
+    this.postService.getPosts().subscribe(posts => {
+      this.posts = posts;
+    })
   }
 }
