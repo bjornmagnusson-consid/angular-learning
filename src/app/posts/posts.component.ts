@@ -15,7 +15,10 @@ export class PostsComponent {
 
   ngOnInit() {
     this.postService.getPosts().subscribe(posts => {
+      console.log(`Loaded ${posts.length} posts`)
       this.posts = posts;
     })
+
+    console.log('PostComponent ngOnInit')
   }
 }

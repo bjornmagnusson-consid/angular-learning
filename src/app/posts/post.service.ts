@@ -1,32 +1,16 @@
 import { Injectable } from '@angular/core';
 import { IPost } from './post.model';
 import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http'
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   getPosts() : Observable<IPost[]> {
-    return of([
-      {
-        title: "Hello World",
-        body: "First blog post"
-      },
-      {
-        title: "Hello World2",
-        body: "First blog post2"
-      },
-      {
-        title: "Hello World3",
-        body: "First blog post3"
-      },
-      {
-        title: "Hello World4",
-        body: "First blog post4"
-      }
-    ])
+    return this.http.get<IPost[]>('/api/posts')
   }
 }
