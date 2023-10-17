@@ -63,7 +63,8 @@
               "browserTarget": "angular-learning:build:production"
             },
             "development": {
-              "browserTarget": "angular-learning:build:development"
+              "browserTarget": "angular-learning:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
