@@ -1,0 +1,38 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: angular-learning
+  labels:
+    app: angular-learning
+    app.kubernetes.io/component: angular-learning
+    app.kubernetes.io/instance: angular-learning
+    app.kubernetes.io/name: angular-learning
+    app.kubernetes.io/part-of: angular-learning
+    app.openshift.io/runtime: angularjs
+    app.openshift.io/runtime-namespace: bjornmagnusson-consi-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: angular-learning
+  template:
+    metadata:
+      labels:
+        app: angular-learning
+        deployment: angular-learning
+      annotations:
+        openshift.io/generated-by: OpenShiftWebConsole
+    spec:
+      containers:
+        - name: angular-learning
+          image: bjornmagnussonconsid/angular-learning:0.1.1
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources: {}
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
