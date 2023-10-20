@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IPost } from './post.model';
 import { PostService } from './post.service';
 
@@ -19,6 +19,6 @@ export class PostsComponent {
       this.posts = posts;
     })
 
-    console.log('PostComponent ngOnInit')
+    console.log('PostsComponent ngOnInit')
   }
 }
