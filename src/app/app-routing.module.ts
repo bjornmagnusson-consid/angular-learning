@@ -4,8 +4,9 @@ import { PostComponent } from './posts/post.component';
 import { PostsComponent } from './posts/posts.component';
 
 const routes: Routes = [
-  { path: ":id", component: PostComponent },
-  { path: "", component: PostsComponent }
+  { path: "posts", component: PostsComponent },
+  { path: 'posts/:id', component: PostComponent },
+  { path: '**', component: PostsComponent }
 ]
 
 @NgModule({
