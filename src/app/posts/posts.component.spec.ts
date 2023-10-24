@@ -43,12 +43,12 @@ describe('PostsComponent', () => {
   it('should load posts', () => {
     const compiled: HTMLElement = fixture.nativeElement;
     const divs = compiled.getElementsByTagName('div');
-    expect(divs?.length).toBe(testData.length);
-    const post1 = divs.item(0);
+    expect(divs?.length).toBe(testData.length + 1);
+    const post1 = divs.item(1);
     expect(post1?.textContent).toContain('title1')
-    const post2 = divs.item(1);
+    const post2 = divs.item(2);
     expect(post2?.textContent).toContain('title2')
-    const post3 = divs.item(2);
+    const post3 = divs.item(3);
     expect(post3?.textContent).toContain('title3')
   })
 });
