@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { PostService } from './post.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { IPost } from './post.model';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 
 describe('PostService', () => {
   let service: PostService;
@@ -36,6 +36,20 @@ describe('PostService', () => {
     })
 
     expect(postsFromApi.length).toBe(testData.length);
+  })
+
+  it('should retrieve no posts upon failure', () => {
+    httpClient.get.and.returnValue(throwError(() => {
+        const error: HttpErrorResponse = new HttpErrorResponse({
+          status: 504,
+          statusText: 'Gateway timeout',
+          error: 'Failure occured when calling /api/posts',
+          url: '/api/posts'
+        });
+        return error
+      }
+    ))
+    service.getPosts().subscribe(posts => expect(posts.length).toBe(0))
   })
 
   it('should retrieve post', () => {

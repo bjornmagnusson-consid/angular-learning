@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IPost } from './post.model';
-import { Observable, of } from 'rxjs';
-import { HttpClient } from '@angular/common/http'
+import { Observable, catchError, of, throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,9 @@ export class PostService {
 
   getPosts() : Observable<IPost[]> {
     console.log('PostService getPosts')
-    return this.http.get<IPost[]>('/api/posts')
+    return this.http.get<IPost[]>('/api/posts').pipe(
+      catchError(() => of([]))
+    )
   }
 
   getPost(id: Number) : Observable<IPost> {
