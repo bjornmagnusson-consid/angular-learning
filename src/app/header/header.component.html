@@ -1,9 +1,7 @@
 <mat-toolbar>
-    <a routerLink="home" mat-button>
-        <span>Home</span>
-    </a>
-    &nbsp;<mat-divider [vertical]="true" style="height: 20px"></mat-divider>&nbsp;
-    <a routerLink="posts" mat-button>
-        <span>Posts</span>
-    </a>
+    <div *ngFor="let menuItem of menuItems">
+        <a routerLink="{{ menuItem.link }}" mat-button>
+            <span>{{ menuItem.text }}</span>
+        </a>
+    </div>
 </mat-toolbar>

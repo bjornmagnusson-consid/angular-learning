@@ -1,8 +1,7 @@
-import { Component, Input, numberAttribute } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IPost } from './post.model';
 import { PostService } from './post.service';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { switchMap } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-post',
