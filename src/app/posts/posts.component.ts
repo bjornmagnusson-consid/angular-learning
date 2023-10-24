@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { IPost } from './post.model';
 import { PostService } from './post.service';
 
