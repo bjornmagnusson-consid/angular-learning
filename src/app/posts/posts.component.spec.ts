@@ -8,6 +8,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { HttpClient } from '@angular/common/http';
 import { IPost } from './post.model';
 import { of } from 'rxjs';
+import { MatListModule } from '@angular/material/list';
 
 describe('PostsComponent', () => {
   let component: PostsComponent;
@@ -26,7 +27,7 @@ describe('PostsComponent', () => {
     httpClient.get.and.returnValue(of(testData));
     TestBed.configureTestingModule({
       declarations: [PostsComponent],
-      imports: [HttpClientTestingModule, AppRoutingModule, RouterModule],
+      imports: [HttpClientTestingModule, AppRoutingModule, RouterModule, MatListModule],
       providers: [{provide: PostService, useValue: new PostService(httpClient)}]
     });
     route = TestBed.inject(ActivatedRoute);
@@ -42,13 +43,13 @@ describe('PostsComponent', () => {
 
   it('should load posts', () => {
     const compiled: HTMLElement = fixture.nativeElement;
-    const divs = compiled.getElementsByTagName('div');
-    expect(divs?.length).toBe(testData.length + 1);
-    const post1 = divs.item(1);
+    const postLinks = compiled.getElementsByTagName('a');
+    expect(postLinks?.length).toBe(testData.length);
+    const post1 = postLinks.item(0);
     expect(post1?.textContent).toContain('title1')
-    const post2 = divs.item(2);
+    const post2 = postLinks.item(1);
     expect(post2?.textContent).toContain('title2')
-    const post3 = divs.item(3);
+    const post3 = postLinks.item(2);
     expect(post3?.textContent).toContain('title3')
   })
 });
