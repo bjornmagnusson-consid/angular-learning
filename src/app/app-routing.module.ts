@@ -3,10 +3,14 @@ import { RouterModule,Routes } from '@angular/router';
 import { PostComponent } from './posts/post.component';
 import { PostsComponent } from './posts/posts.component';
 import { HomeComponent } from './home/home.component';
+import { ProductsComponent } from './products/products.component';
+import { ProductComponent } from './products/product.component';
 
 const routes: Routes = [
   { path: "posts", component: PostsComponent },
   { path: 'posts/:id', component: PostComponent },
+  { path: "products", component: ProductsComponent },
+  { path: 'products/:id', component: ProductComponent },
   { path: 'home', component: HomeComponent },
   { path: '**', component: HomeComponent }
 ]

@@ -1,0 +1,9 @@
+<div>{{products?.length}} product</div>
+ <mat-grid-list cols="4" rowHeight="100px">
+    <mat-grid-tile
+        *ngFor="let product of products"
+        [colspan]="1"
+        [rowspan]="1">
+        <a mat-button routerLink="/products/{{ product.id }}">{{ product.name }}</a>  
+    </mat-grid-tile>
+  </mat-grid-list>
