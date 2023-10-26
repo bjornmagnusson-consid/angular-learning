@@ -1,0 +1,21 @@
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: learning 
+  backend:
+    image: bjornmagnussonconsid/spring-boot-learning:${BACKEND_VERSION:-latest}
+    ports:
+      - "8888:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/learning
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: password
+  frontend:
+    image: bjornmagnussonconsid/angular-learning:${FRONTEND_VERSION:-latest}
+    ports:
+      - "8000:8080"
+    environment:
+      API_URL: backend:8080
