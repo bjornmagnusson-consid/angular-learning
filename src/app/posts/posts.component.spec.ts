@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { IPost } from './post.model';
 import { of } from 'rxjs';
 import { MatListModule } from '@angular/material/list';
+import { AppConfig } from '../app-config.service';
 
 describe('PostsComponent', () => {
   let component: PostsComponent;
@@ -16,6 +17,7 @@ describe('PostsComponent', () => {
   let postService: PostService;
   let route: ActivatedRoute;
   let httpClient: jasmine.SpyObj<HttpClient>;
+  let appConfig: jasmine.SpyObj<AppConfig>;
   let testData: IPost[] = [
     {id: 1, title: 'title1', body: 'body1'},
     {id: 2, title: 'title2', body: 'body2'},
@@ -24,11 +26,12 @@ describe('PostsComponent', () => {
 
   beforeEach(() => {
     httpClient = jasmine.createSpyObj('HttpClient', ['get']);
+    appConfig = jasmine.createSpyObj('AppConfig', ['load', 'getApiUrl'])
     httpClient.get.and.returnValue(of(testData));
     TestBed.configureTestingModule({
       declarations: [PostsComponent],
       imports: [HttpClientTestingModule, AppRoutingModule, RouterModule, MatListModule],
-      providers: [{provide: PostService, useValue: new PostService(httpClient)}]
+      providers: [{provide: PostService, useValue: new PostService(httpClient, appConfig)}]
     });
     route = TestBed.inject(ActivatedRoute);
     fixture = TestBed.createComponent(PostsComponent);

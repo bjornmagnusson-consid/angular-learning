@@ -8,6 +8,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { HttpClient } from '@angular/common/http';
 import { IPost } from './post.model';
 import { of } from 'rxjs';
+import { AppConfig } from '../app-config.service';
 
 describe('PostComponent', () => {
   let component: PostComponent;
@@ -15,15 +16,17 @@ describe('PostComponent', () => {
   let postService: PostService;
   let route: ActivatedRoute;
   let httpClient: jasmine.SpyObj<HttpClient>;
+  let appConfig: jasmine.SpyObj<AppConfig>;
   let testData: IPost = {id: 1, title: 'title', body: 'body'}
 
   beforeEach(() => {
     httpClient = jasmine.createSpyObj('HttpClient', ['get']);
+    appConfig = jasmine.createSpyObj('AppConfig', ['load', 'getApiUrl'])
     httpClient.get.and.returnValue(of(testData));
     TestBed.configureTestingModule({
       declarations: [PostComponent],
       imports: [HttpClientTestingModule, AppRoutingModule, RouterModule],
-      providers: [{provide: PostService, useValue: new PostService(httpClient)}]
+      providers: [{provide: PostService, useValue: new PostService(httpClient, appConfig)}]
     });
     route = TestBed.inject(ActivatedRoute);
     fixture = TestBed.createComponent(PostComponent);
