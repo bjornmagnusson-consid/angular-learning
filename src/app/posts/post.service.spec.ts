@@ -5,17 +5,20 @@ import { PostService } from './post.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { IPost } from './post.model';
 import { of, throwError } from 'rxjs';
+import { AppConfig } from '../app-config.service';
 
 describe('PostService', () => {
   let service: PostService;
   let httpClient: jasmine.SpyObj<HttpClient>;
+  let appConfig: jasmine.SpyObj<AppConfig>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule]
     });    
     httpClient = jasmine.createSpyObj('HttpClient', ['get']);
-    service = new PostService(httpClient);
+    appConfig = jasmine.createSpyObj('AppConfig', ['load', 'getApiUrl']);
+    service = new PostService(httpClient, appConfig);
   });
 
   it('should be created', () => {

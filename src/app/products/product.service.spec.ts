@@ -5,17 +5,20 @@ import { ProductService } from './product.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { IProduct } from './product.model';
 import { of, throwError } from 'rxjs';
+import { AppConfig } from '../app-config.service';
 
 describe('ProductService', () => {
   let service: ProductService;
   let httpClient: jasmine.SpyObj<HttpClient>;
+  let appConfig: jasmine.SpyObj<AppConfig>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule]
-    });    
+    });        
     httpClient = jasmine.createSpyObj('HttpClient', ['get']);
-    service = new ProductService(httpClient);
+    appConfig = jasmine.createSpyObj('AppConfig', ['load', 'getApiUrl']);
+    service = new ProductService(httpClient, appConfig);
   });
 
   it('should be created', () => {
