@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, catchError, of } from 'rxjs';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { IProduct } from './product.model';
 import { AppConfig } from '../app-config.service';
 
@@ -14,12 +14,18 @@ export class ProductService {
   getProducts() : Observable<IProduct[]> {
     console.log('ProductService getProducts')
     return this.http.get<IProduct[]>(this.config.getApiUrl('/api/products')).pipe(
-      catchError(() => of([]))
+      catchError(this.handleError)
     )
   }
 
   getProduct(id: Number) : Observable<IProduct> {
     console.log('ProductService getProduct ' + id)
-    return this.http.get<IProduct>(this.config.getApiUrl('/api/products/' + id))
+    return this.http.get<IProduct>(this.config.getApiUrl('/api/products/' + id)).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  private handleError(error: HttpErrorResponse) : Observable<any> {
+    return of([]);
   }
 }

@@ -21,12 +21,12 @@ export class AppConfig {
     return this.httpClient
       .get<Config>('./assets/config.json')
       .toPromise()
-      .catch(error => {
-        console.warn(`Config not found, using apiUrl ${this.apiUrl}`)
-      })
       .then(config => {
         this.apiUrl = config?.url;
         console.log(`Config found, using apiUrl ${this.apiUrl}`)
+      })
+      .catch(error => {
+        console.warn(`Config not found, using apiUrl ${this.apiUrl}`)
       });
   }
 

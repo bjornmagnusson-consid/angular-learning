@@ -14,12 +14,18 @@ export class PostService {
   getPosts() : Observable<IPost[]> {
     console.log('PostService getPosts')
     return this.http.get<IPost[]>(this.config.getApiUrl('/api/posts')).pipe(
-      catchError(() => of([]))
+      catchError(this.handleError)
     )
   }
 
   getPost(id: Number) : Observable<IPost> {
     console.log('PostService getPost ' + id)
-    return this.http.get<IPost>(this.config.getApiUrl('/api/posts/' + id))
+    return this.http.get<IPost>(this.config.getApiUrl('/api/posts/' + id)).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  private handleError(error: HttpErrorResponse) : Observable<any> {
+    return of([]);
   }
 }
