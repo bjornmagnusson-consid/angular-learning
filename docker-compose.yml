@@ -5,6 +5,8 @@ services:
       POSTGRES_USERNAME: postgres
       POSTGRES_PASSWORD: password
       POSTGRES_DB: learning 
+    ports:
+      - "5432:5432"
   backend:
     image: bjornmagnussonconsid/spring-boot-learning:${BACKEND_VERSION:-latest}
     ports:
@@ -13,9 +15,14 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/learning
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: password
+      WEB_CORS_ALLOWED_ORIGINS: "http://localhost:8000"
   frontend:
     image: bjornmagnussonconsid/angular-learning:${FRONTEND_VERSION:-latest}
     ports:
       - "8000:8080"
     environment:
-      API_URL: localhost:8888
+      API_URL: http://localhost:8888
+    depends_on:
+      - backend
+    entrypoint: launcher
+    command: "\"envsubst '$${API_URL}' < /workspace/dist/angular-learning/assets/config.teml.json > /workspace/dist/angular-learning/assets/config.json && /cnb/process/web\""

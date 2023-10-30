@@ -1,0 +1,39 @@
+[_]
+schema-version = "0.2"
+id = "io.buildpacks.angular-learning"
+
+[io.buildpacks]
+exclude = [
+    "node_modules"
+]
+
+[[io.buildpacks.group]]
+id = "paketo-buildpacks/web-servers"
+version = "0.19.1"
+
+[[io.buildpacks.group]]
+id = "fagiani/apt"
+version = "0.2.5"
+
+[[io.buildpacks.group]]
+id = "me/workspace-tasks"
+
+  [io.buildpacks.group.script]
+  api = "0.9"
+  inline = "chmod -R 777 /workspace/dist/angular-learning/assets"
+
+[[io.buildpacks.build.env]]
+name='BP_NODE_RUN_SCRIPTS'
+value='build'
+
+[[io.buildpacks.build.env]]
+name='BP_WEB_SERVER'
+value='nginx'
+
+[[io.buildpacks.build.env]]
+name='BP_WEB_SERVER_ROOT'
+value='dist/angular-learning'
+
+[[io.buildpacks.build.env]]
+name='BP_WEB_SERVER_ENABLE_PUSH_STATE'
+value='true'
