@@ -33,7 +33,7 @@ jobs:
         sudo apt-get update
         sudo apt-get install pack-cli
 
-        pack config default-builder paketobuildpacks/builder-jammy-base
+        pack config default-builder paketobuildpacks/builder:buildpackless-full
     - name: Image metadata
       id: meta
       uses: docker/metadata-action@v5
@@ -79,7 +79,7 @@ jobs:
         username: ${{ vars.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
     - name: Publish image
-      run: pack build ${{ vars.DOCKER_USERNAME }}/angular-learning:${{ steps.meta.outputs.version }} --buildpack paketo-buildpacks/web-servers --publish --tag "${{ steps.transform.outputs.tags }}" ${{ steps.transform.outputs.labels }} --env BP_NODE_RUN_SCRIPTS=build --env BP_WEB_SERVER=nginx --env BP_WEB_SERVER_ROOT=dist/angular-learning --env BP_WEB_SERVER_ENABLE_PUSH_STATE=true --verbose
+      run: pack build ${{ vars.DOCKER_USERNAME }}/angular-learning:${{ steps.meta.outputs.version }} --publish --tag "${{ steps.transform.outputs.tags }}" ${{ steps.transform.outputs.labels }} --verbose
 
     - name: Find PR comment
       if: github.event_name == 'pull_request'
