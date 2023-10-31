@@ -4,6 +4,7 @@
         *ngFor="let product of products"
         [colspan]="1"
         [rowspan]="1">
-        <a mat-button routerLink="/products/{{ product.id }}">{{ product.name }}</a>  
+        <a mat-button routerLink="/products/{{ product.id }}">{{ product.name }}</a>
+        <button (click)="addToCart(product)">Buy</button>
     </mat-grid-tile>
   </mat-grid-list>

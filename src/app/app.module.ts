@@ -17,6 +17,7 @@ import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductComponent } from './products/product.component';
 import { AppConfig, initConfig } from './app-config.service';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AppConfig, initConfig } from './app-config.service';
     HeaderComponent,
     HomeComponent,
     ProductsComponent,
-    ProductComponent
+    ProductComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
