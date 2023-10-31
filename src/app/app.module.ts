@@ -7,9 +7,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 
 import { AppComponent } from './app.component';
-import { PostsComponent } from './posts/posts.component';
 import { HttpClientModule } from '@angular/common/http';
-import { PostComponent } from './posts/post.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
@@ -22,8 +20,6 @@ import { CartComponent } from './cart/cart.component';
 @NgModule({
   declarations: [
     AppComponent,
-    PostsComponent,
-    PostComponent,
     HeaderComponent,
     HomeComponent,
     ProductsComponent,
