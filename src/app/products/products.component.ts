@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IProduct } from './product.model';
 import { ProductService } from './product.service';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-products',
@@ -10,7 +11,7 @@ import { ProductService } from './product.service';
 export class ProductsComponent {
   products?: IProduct[]
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService, private cartService: CartService) {}
 
   ngOnInit() {
     this.productService.getProducts().subscribe(products => {
@@ -19,5 +20,9 @@ export class ProductsComponent {
     })
 
     console.log('ProductsComponent ngOnInit')
+  }
+
+  addToCart(product: IProduct) {
+    this.cartService.add(product)
   }
 }

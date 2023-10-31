@@ -27,12 +27,14 @@ describe('HeaderComponent', () => {
   it('should render menu items', () => {
     const compiled: HTMLElement = fixture.nativeElement;
     const menuItems = compiled.getElementsByTagName('a');
-    expect(menuItems.length).toBe(3)
-    const menuItem1 = menuItems.item(0);
-    expect(menuItem1?.textContent).toContain('Home')
-    const menuItem2 = menuItems.item(1);
-    expect(menuItem2?.textContent).toContain('Posts')
-    const menuItem3 = menuItems.item(2);
-    expect(menuItem3?.textContent).toContain('Products')
+    expect(menuItems.length).toBe(4)
+    const home = menuItems.item(0);
+    expect(home?.textContent).toContain('Home')
+    const posts = menuItems.item(1);
+    expect(posts?.textContent).toContain('Posts')
+    const products = menuItems.item(2);
+    expect(products?.textContent).toContain('Products')
+    const cart = menuItems.item(3);
+    expect(cart?.textContent).toContain('Cart')
   })
 });
