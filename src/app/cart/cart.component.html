@@ -1,9 +1,10 @@
-<div>{{cart?.length}} products</div>
- <mat-grid-list cols="1" rowHeight="20px">
-    <mat-grid-tile
-        *ngFor="let product of cart"
-        [colspan]="1"
-        [rowspan]="1">
-        <a mat-button routerLink="/products/{{ product.id }}">{{ product.name }}</a>
-    </mat-grid-tile>
-  </mat-grid-list>
+<div>{{cart.products.length}} products</div>
+<mat-grid-list cols="1" rowHeight="30px">
+  <mat-grid-tile
+      *ngFor="let product of cart?.products"
+      [colspan]="1"
+      [rowspan]="1">
+      <a mat-button routerLink="/products/{{ product.id }}">Id:{{ product.id }} Number:{{ product.number }}</a>
+      <button (click)="remove(product.id)">Remove</button>
+  </mat-grid-tile>
+</mat-grid-list>
