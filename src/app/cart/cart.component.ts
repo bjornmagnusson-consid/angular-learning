@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IProduct } from '../products/product.model';
 import { CartService } from '../cart.service';
+import { ICart } from './cart.model';
+import { ProductService } from '../products/product.service';
 
 @Component({
   selector: 'app-cart',
@@ -8,11 +9,31 @@ import { CartService } from '../cart.service';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent {
-  cart?: IProduct[]
+  cart: ICart = {products: []}
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService, private productService: ProductService) {}
 
   ngOnInit() {
-    this.cart = this.cartService.cart
+    this.cartService.get().subscribe(cart => {
+      this.cart = cart
+    })
   }
+
+  remove(id: number) {
+    this.cartService.delete(id);
+    let products = this.cart?.products
+    let isZero: boolean = false
+    products.forEach(product => {
+      if (product.id === id) {
+        product.number--
+        if (product.number === 0) {
+          isZero = true
+        }
+      }
+    })
+    if (isZero) {
+      let newProducts = products.filter((product, _) => product.number > 0)
+      this.cart.products = newProducts
+    }
+  }    
 }
