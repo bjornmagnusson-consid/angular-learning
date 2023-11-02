@@ -3,6 +3,6 @@ export interface ICart {
 }
 
 export interface ICartItem {
-    id: number,
+    productId: number,
     number: number
 }

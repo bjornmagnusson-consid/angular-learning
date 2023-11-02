@@ -1,10 +1,12 @@
-<div>{{cart.products.length}} products</div>
+<div *ngIf="cart.products.length > 0">{{getNumberOfItems()}} items</div>
+<div *ngIf="cart.products.length === 0">Cart is empty</div>
 <mat-grid-list cols="1" rowHeight="30px">
   <mat-grid-tile
-      *ngFor="let product of cart?.products"
+      *ngFor="let cartItem of cart?.products"
       [colspan]="1"
       [rowspan]="1">
-      <a mat-button routerLink="/products/{{ product.id }}">Id:{{ product.id }} Number:{{ product.number }}</a>
-      <button (click)="remove(product.id)">Remove</button>
+      <a mat-button routerLink="/products/{{ cartItem.productId }}">Id:{{ cartItem.productId }} Number:{{ cartItem.number }}</a>
+      <button (click)="add(cartItem.productId)">Add</button>
+      <button (click)="remove(cartItem.productId)">Remove</button>
   </mat-grid-tile>
 </mat-grid-list>

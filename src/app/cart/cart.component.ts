@@ -19,14 +19,24 @@ export class CartComponent {
     })
   }
 
+  add(id: number) {
+    this.cartService.add(id)
+    let products = this.cart?.products
+    products.forEach(cartItem => {
+      if (cartItem.productId === id) {
+        cartItem.number++
+      }
+    })
+  }    
+
   remove(id: number) {
     this.cartService.delete(id);
     let products = this.cart?.products
     let isZero: boolean = false
-    products.forEach(product => {
-      if (product.id === id) {
-        product.number--
-        if (product.number === 0) {
+    products.forEach(cartItem => {
+      if (cartItem.productId === id) {
+        cartItem.number--
+        if (cartItem.number === 0) {
           isZero = true
         }
       }
@@ -35,5 +45,13 @@ export class CartComponent {
       let newProducts = products.filter((product, _) => product.number > 0)
       this.cart.products = newProducts
     }
-  }    
+  }
+
+  getNumberOfItems(): number {
+    let number = 0
+    this.cart.products.forEach(cartItem => {
+      number += cartItem.number
+    })
+    return number
+  }
 }
