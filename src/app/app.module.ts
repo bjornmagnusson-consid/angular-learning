@@ -5,6 +5,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -16,6 +17,7 @@ import { ProductsComponent } from './products/products.component';
 import { ProductComponent } from './products/product.component';
 import { AppConfig, initConfig } from './app-config.service';
 import { CartComponent } from './cart/cart.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { CartComponent } from './cart/cart.component';
     HomeComponent,
     ProductsComponent,
     ProductComponent,
-    CartComponent
+    CartComponent,
+    EditProductComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,8 @@ import { CartComponent } from './cart/cart.component';
     MatDividerModule,
     MatButtonModule,
     MatListModule,
-    MatGridListModule
+    MatGridListModule,
+    ReactiveFormsModule
   ],
   providers: [
     AppConfig,
