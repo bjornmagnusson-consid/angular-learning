@@ -16,9 +16,12 @@ export class CartService {
     return this.httpClient.get<ICart>('/api/cart')
   }
 
-  add(product: IProduct) {
-    this.httpClient.post(this.config.getApiUrl('/api/cart/products'), product).subscribe()
-    console.log(`Added product (id=${product.id}, name=${product.name}) to cart`)
+  add(id: number) {
+    this.httpClient.get<IProduct>(this.config.getApiUrl(`/api/products/${id}`)).subscribe(product => {
+      this.httpClient.post(this.config.getApiUrl('/api/cart/products'), product).subscribe(() => {
+        console.log(`Added product (id=${product.id}, name=${product.name}) to cart`)
+      })      
+    })    
   }
 
   delete(id: number) {

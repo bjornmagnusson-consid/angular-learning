@@ -22,7 +22,7 @@ export class ProductsComponent {
     console.log('ProductsComponent ngOnInit')
   }
 
-  addToCart(product: IProduct) {
-    this.cartService.add(product)
+  addToCart(id: number) {
+    this.cartService.add(id)
   }
 }
