@@ -13,7 +13,7 @@ export class CartService {
   constructor(private httpClient: HttpClient, private config: AppConfig, private productService: ProductService) {}
 
   get(): Observable<ICart> {
-    return this.httpClient.get<ICart>('/api/cart')
+    return this.httpClient.get<ICart>(this.config.getApiUrl('/api/cart'))
   }
 
   add(id: number) {
