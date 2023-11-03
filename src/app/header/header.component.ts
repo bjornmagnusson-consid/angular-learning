@@ -8,7 +8,8 @@ import { Component } from '@angular/core';
 export class HeaderComponent {
   menuItems: MenuItem[] = [
     {link: 'home', text: 'Home'},
-    {link: 'products', text: 'Products'},
+    {link: 'products', text: 'Catalog'},
+    {link: 'products/edit', text: 'Product'},
     {link: 'cart', text: 'Cart'}
   ]
 }
