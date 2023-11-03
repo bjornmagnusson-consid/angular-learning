@@ -5,6 +5,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -38,6 +39,7 @@ import { EditProductComponent } from './edit-product/edit-product.component';
     MatDividerModule,
     MatButtonModule,
     MatListModule,
+    MatIconModule,
     MatGridListModule,
     ReactiveFormsModule
   ],
