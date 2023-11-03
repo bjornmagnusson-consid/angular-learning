@@ -29,7 +29,7 @@ jobs:
         cache: 'npm'
     
     - name: Bump version
-      run: npm version ${{ steps.version.outputs.inc-patch }} --no-git-tag-version
+      run: npm version ${{ steps.version.outputs.inc-prepatch }} --no-git-tag-version
 
     - name: Setup git user
       uses: snow-actions/git-config-user@v1.0.0
