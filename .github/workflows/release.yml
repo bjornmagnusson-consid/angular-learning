@@ -37,7 +37,7 @@ jobs:
     - name: Commit version update
       run: |
         git add package.json
-        git commit -m "Bump version to ${{ steps.version.outputs.inc-patch }}-SNAPSHOT"
+        git commit -m "Bump version to ${{ steps.version.outputs.inc-prepatch }}"
 
     - name: Push to repository
       uses: ad-m/github-push-action@master
