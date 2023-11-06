@@ -27,9 +27,9 @@ describe('ProductService', () => {
 
   it('should retrieve products', () => {
     const testData: IProduct[] = [
-      {id: 1, name: 'title1', description: 'description'},
-      {id: 2, name: 'title2', description: 'description'},
-      {id: 3, name: 'title3', description: 'description'}
+      {id: 1, name: 'title1', description: 'description', category: {id: 1, name: "category"}},
+      {id: 2, name: 'title2', description: 'description', category: {id: 1, name: "category"}},
+      {id: 3, name: 'title3', description: 'description', category: {id: 1, name: "category"}}
     ];
     httpClient.get.and.returnValue(of(testData));
 
@@ -56,7 +56,7 @@ describe('ProductService', () => {
   })
 
   it('should retrieve product', () => {
-    const testData: IProduct = {id: 10, name: 'name', description: 'description'}
+    const testData: IProduct = {id: 10, name: 'name', description: 'description', category: {id: 1, name: "category"}}
     httpClient.get.and.returnValue(of(testData));
 
     let productFromApi!: IProduct;

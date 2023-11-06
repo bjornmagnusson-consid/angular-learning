@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../products/product.service';
+import { ICategory } from '../category.model';
+import { CategoriesService } from '../categories.service';
 
 @Component({
   selector: 'app-edit-product',
@@ -10,12 +12,15 @@ import { ProductService } from '../products/product.service';
 })
 export class EditProductComponent {
   id!: number
+  categories!: ICategory[];
 
   name: FormControl = new FormControl()
   description: FormControl = new FormControl()
+  category: FormControl = new FormControl()
 
   constructor(
-    private productService: ProductService, 
+    private productService: ProductService,
+    private categoryService: CategoriesService,
     private route: ActivatedRoute) {}
 
   ngOnInit() {
@@ -30,12 +35,22 @@ export class EditProductComponent {
         this.id = product.id
         this.name.setValue(product.name)
         this.description.setValue(product.description)
+        this.categoryService.getCategories().subscribe(categories => {
+          this.categories = categories
+          if (product.category !== null) {
+            this.category.setValue(this.categories.find(category => category.id === product.category.id))
+          }
+        })        
       })
-    }
+    } else {
+      this.categoryService.getCategories().subscribe(categories => {
+        this.categories = categories
+      })
+    }    
   }
 
   save() {
-    var updatedProduct = {id: this.id, name: this.name.value, description: this.description.value}
+    var updatedProduct = {id: this.id, name: this.name.value, description: this.description.value, category: this.category.value}
     this.productService.saveProduct(updatedProduct).subscribe()
   }
 }
