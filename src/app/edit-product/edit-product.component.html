@@ -4,6 +4,10 @@
             <nav>Details</nav>
             <input [formControl]="name" placeholder="Name"/><br/>
             <input [formControl]="description" placeholder="Description"/><br/>
+            <label for="category">Choose a category:</label>
+            <select [formControl]="category" id="category">
+                <option *ngFor="let category of categories" [ngValue]="category">{{ category.name }}</option>
+            </select>
         </section>
     </form>    
     <div>

@@ -27,7 +27,6 @@ export class ProductService {
 
   saveProduct(product: IProduct) : Observable<void> {
     console.log('ProductService saveProduct')
-    console.log(product)
     if (product.id === undefined) {
       return this.http.put<IProduct>(this.config.getApiUrl('/api/products'), product).pipe(
         catchError(this.handleError)
