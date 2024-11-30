@@ -1,10 +1,14 @@
 <div>{{products?.length}} product</div>
+<div>
+  <label for="filter">Filter = {{ category || 'No filter' }}</label>
+  <button id="filter" (click)="filter()">Filter</button>
+</div>
  <mat-grid-list cols="3" rowHeight="100px">
     <mat-grid-tile
-        *ngFor="let product of products"
+        *ngFor="let product of filteredProducts"
         [colspan]="1"
         [rowspan]="1">
-        <a mat-button routerLink="/products/{{ product.id }}">{{ product.name }}</a>
+        <a mat-button routerLink="/products/{{ product.id }}">{{ getTitle(product) }}</a>
         <button (click)="addToCart(product.id)"><mat-icon>add</mat-icon></button>
         <button (click)="edit(product.id)"><mat-icon>edit</mat-icon></button>
     </mat-grid-tile>
